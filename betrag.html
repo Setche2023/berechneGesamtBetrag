@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background: linear-gradient(45deg, red 5%, rgb(39, 37, 25) 66%);
+        background-repeat: no-repeat;
+        width: 100vh;
+        height: 100vh;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 2em;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        color: gold;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 2em;
+        text-shadow: 2px 2px 4px black;
+      }
+      form {
+        background: white;
+        padding: 2em;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em;
+      }
+      .form-group label {
+        color: black;
+        font-weight: bold;
+        flex: 1;
+        margin-right: 1em;
+      }
+      .form-group input[type="number"] {
+        width: 4em;
+        text-align: center;
+      }
+      input[type="text"] {
+        background-color: #f8f8f8;
+        text-align: right;
+        padding: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 6em;
+      }
+      input[type="button"],
+      input[type="submit"],
+      input[type="reset"] {
+        font-size: 1em;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-top: 1em;
+      }
+      input[type="button"] {
+        background-color: black;
+        color: gold;
+      }
+      input[type="button"]:hover {
+        background-color: gold;
+        color: black;
+        transition: 0.3s;
+      }
+      input[type="submit"] {
+        background-color: black;
+        color: gold;
+      }
+      input[type="submit"]:hover {
+        background-color: gold;
+        color: black;
+      }
+      input[type="reset"] {
+        background-color: red;
+        color: white;
+      }
+      input[type="reset"]:hover {
+        background-color: darkred;
+      }
+    </style>
+    <title>Zusatzleistungen Wellness</title>
+    <script type="text/javascript">
+      function berechneGesamtBetrag(){
+          var gesamt = 0;
+          var cbrm = document.getElementById("cbrm");
+          var cbmb = document.getElementById("cbmb");
+          if (cbrm.checked){
+              var anzahl_rm = document.getElementById("anzahl_rm").value;
+              if (anzahl_rm >= 0 && anzahl_rm <= 10)  {
+                  gesamt = gesamt + (anzahl_rm * 45.00);
+              }else{
+                  alert("Bitte eine gültige Anzahl von Rückenmassagen (0-10) angeben!");
+              }
+          }
+      
+      if (cbmb.checked){
+          var anzahl_mb = document.getElementById("anzahl_mb").value;
+          if (anzahl_mb >= 0 && anzahl_mb <= 10)  {
+              gesamt = gesamt + (anzahl_mb * 30.00);
+          } else{
+              alert("Bitte eine gültige Anzahl von Moorbaden (0-10) angeben!");
+              return;
+      }
+    }
+    document.getElementById("gesamt").value = gesamt;
+}
+    </script>
+  </head>
+  <body>
+    <h1>Zusatzleistungen im Wellnessbereich</h1>
+    <form action="index.html" method="post">
+      <!-- Rückenmassage -->
+      <div class="form-group">
+        <input type="checkbox" id="cbrm" />
+        <label for="anzahl_rm">Rückenmassage 30min (Preis: 45,00 Euro)</label>
+        <input
+          type="number"
+          id="anzahl_rm"
+          value="0"
+          min="0"
+          max="10"
+          oninput="this.value=this.value.replace(/[^0-9]/g, '');"
+        />
+      </div>
+
+      <!-- Moorbad -->
+      <div class="form-group">
+        <input type="checkbox" id="cbmb" />
+        <label for="anzahl_mb">Moorbad 20 min (Preis: 30,00 Euro)</label>
+        <input
+          type="number"
+          id="anzahl_mb"
+          value="0"
+          min="0"
+          max="10"
+          oninput="this.value=this.value.replace(/[^0-9]/g, '');"
+        />
+      </div>
+
+      <!-- Total -->
+      <div class="form-group">
+        <label for="gesamt">Gesamtbetrag:</label>
+        <input type="text" id="gesamt" readonly /> Euro
+        <input type="button" value="Berechnen" id="berechne" 
+        style="margin-left: 1em;" onclick="berechneGesamtBetrag()"/>
+      </div>
+
+      <!-- Boutons -->
+      <div style="text-align: center">
+        <input type="submit" value="Leistung buchen" />
+        <input type="reset" value="Abbrechen" />
+      </div>
+    </form>
+  </body>
+</html>
